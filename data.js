@@ -1,5 +1,9 @@
 let responses = [];
 const userResponsesSection = document.querySelector('#user-responses');
+const searchInput = document.querySelector('#search');
+const codingSelect = document.querySelector('#coding');
+const minInput = document.querySelector('#mininput');
+const maxInput = document.querySelector('#maxinput');
 
 const fetchUserResponses = async () => {
   const response = await fetch(
@@ -43,3 +47,33 @@ const fetchAndShowResponses = async () => {
 };
 
 fetchAndShowResponses();
+
+function responseFilter(userResponse) {
+    const renderUserResponse = userResponse => {
+    const name = userResponse['Full Name'];
+    const food = userResponse['Favourite RBI food?'];
+    const recommend = userResponse['Would you recommend your favourite RBI food to others?'];
+    const rsc = userResponse['Which country is your RSC in?'];
+    const travel = userResponse['Post COVID, what is you first travel destination?'];
+    const coding = userResponse['Which coding style do you like?'];
+    const googlePhotoId = food.split('id=')[1];
+    
+    const searchTerm = 
+    searchInput.nodeValue.toLowerCase();
+    const selectedCoding = codingSelect.Value
+    const minConfidence = Number(minInput.value)
+    const maxConfidence = Number(maxInput.value)
+
+    return (name.toLowerCase().includes (searchTerm) || travel.toLowerCase().includes(searchTerm)) && (selectedCoding === "All" || code === selectedCoding)  &&
+    (filterConfidence >= minConfidence && filterConfidence <= maxConfidence)
+  }
+
+  function handleFilterInput() {
+    const filteredResults = userResponses.filter(responseFilter);
+    responses.innerHTML = filteredResults.map (renderUserResponse).join("");
+  }
+
+  searchInput.addEventListener('input', handleFilterInput);
+codingSelect.addEventListener('input', handleFilterInput);
+minInput.addEventListener('input', handleFilterInput);
+maxInput.addEventListener('input', handleFilterInput);

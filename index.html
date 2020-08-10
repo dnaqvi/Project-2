@@ -9,7 +9,24 @@
   <body>
     <header></header>
     <main>
-      <section id="user-responses"><h2>Loading...</h2></section>
+      <section id="user-responses">
+        <h2>Loading...</h2>
+        <div>
+          <label for="search">Search:</label>
+          <input id="search" type="text" autocomplete="off" />
+          <label for="coding">Coding Preference:</label>
+          <select id="coding">
+            <option>All</option>
+            <option>HTML</option>
+            <option>CSS</option>
+            <option>Javascript</option>
+          </select>
+        </div>
+        <label for="mininput">Min:</label>
+        <input id="mininput" type="number" min="1" max="5" value="1" />
+        <label for="maxinput">Max:</label>
+        <input id="maxinput" type="number" min="1" max="5" value="5" />
+      </section>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.2.0/papaparse.min.js"></script>
     <script src="data.js"></script>
