@@ -39,11 +39,48 @@ const renderUserResponse = userResponse => {
 `;
 };
 
+const makeChart = () => {
+  const locationsTally = { Canada: 0, 'United States': 0 };
+
+  responses.forEach(response => {
+    const oneUsersLocation = response['Which country is your RSC in?'];
+    locationsTally[oneUsersLocation] += 1;
+  });
+
+  // const emojis = {
+  //   Canada: '🇨🇦',
+  //   'United States': '🇺🇸',
+  // };
+
+  /* eslint-disable no-new */
+  new Chart('pie-chart', {
+    type: 'pie',
+    data: {
+      datasets: [
+        {
+          data: Object.values(locationsTally),
+          backgroundColor: ['teal', 'green'],
+        },
+      ],
+      // These labels appear in the legend and in the tooltips when hovering different arcs
+      labels: Object.keys(locationsTally), // .map(word => emojis[word]),
+    },
+    options: {
+      legend: {
+        labels: {
+          fontColor: 'black',
+        },
+      },
+    },
+  });
+};
+
 const fetchAndShowResponses = async () => {
   await fetchUserResponses();
   const eachUserResponseHTML = responses.map(renderUserResponse);
   const allUserResponseHTML = eachUserResponseHTML.join('');
   userResponsesSection.innerHTML = allUserResponseHTML;
+  makeChart();
 };
 
 fetchAndShowResponses();
