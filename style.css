@@ -67,3 +67,8 @@ main {
 h1 {
   font-size: small;
 }
+
+#chart-section {
+  max-width: 30rem;
+  margin: 0 auto;
+}
