@@ -9,25 +9,27 @@
   <body>
     <header></header>
     <main>
-      <section id="user-responses">
-        <h2>Loading...</h2>
-        <div>
-          <label for="search">Search:</label>
-          <input id="search" type="text" autocomplete="off" />
-          <label for="coding">Coding Preference:</label>
-          <select id="coding">
-            <option>All</option>
-            <option>HTML</option>
-            <option>CSS</option>
-            <option>Javascript</option>
-          </select>
-        </div>
+      <div id="search-bar">
+        <label for="search">Search:</label>
+        <input id="search" type="text" autocomplete="off" />
+        <label for="coding">Coding Preference:</label>
+        <select id="coding">
+          <option>All</option>
+          <option>HTML</option>
+          <option>CSS</option>
+          <option>Javascript</option>
+        </select>
         <label for="mininput">Min:</label>
         <input id="mininput" type="number" min="1" max="5" value="1" />
         <label for="maxinput">Max:</label>
         <input id="maxinput" type="number" min="1" max="5" value="5" />
+      </div>
+      <section id="user-responses">
+        <h2>Loading...</h2>
       </section>
+      <canvas id="pie-chart" width="100" height="100"></canvas>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.2.0/papaparse.min.js"></script>
     <script src="data.js"></script>
   </body>

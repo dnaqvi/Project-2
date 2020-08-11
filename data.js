@@ -49,31 +49,36 @@ const fetchAndShowResponses = async () => {
 fetchAndShowResponses();
 
 function responseFilter(userResponse) {
-    const renderUserResponse = userResponse => {
-    const name = userResponse['Full Name'];
-    const food = userResponse['Favourite RBI food?'];
-    const recommend = userResponse['Would you recommend your favourite RBI food to others?'];
-    const rsc = userResponse['Which country is your RSC in?'];
-    const travel = userResponse['Post COVID, what is you first travel destination?'];
-    const coding = userResponse['Which coding style do you like?'];
-    const googlePhotoId = food.split('id=')[1];
-    
-    const searchTerm = 
-    searchInput.nodeValue.toLowerCase();
-    const selectedCoding = codingSelect.Value
-    const minConfidence = Number(minInput.value)
-    const maxConfidence = Number(maxInput.value)
+  const name = userResponse['Full Name'];
+  const food = userResponse['Favourite RBI food?'];
+  const recommend =
+    userResponse['Would you recommend your favourite RBI food to others?'];
+  const rsc = userResponse['Which country is your RSC in?'];
+  const travel =
+    userResponse['Post COVID, what is you first travel destination?'];
+  const coding = userResponse['Which coding style do you like?'];
+  const googlePhotoId = food.split('id=')[1];
+  const searchTerm = searchInput.value.toLowerCase();
+  const selectedCoding = codingSelect.value;
+  const minRecommend = Number(minInput.value);
+  const maxReccomend = Number(maxInput.value);
 
-    return (name.toLowerCase().includes (searchTerm) || travel.toLowerCase().includes(searchTerm)) && (selectedCoding === "All" || code === selectedCoding)  &&
-    (filterConfidence >= minConfidence && filterConfidence <= maxConfidence)
-  }
+  return (
+    (name.toLowerCase().includes(searchTerm) ||
+      travel.toLowerCase().includes(searchTerm)) &&
+    (selectedCoding === 'All' || coding.includes(selectedCoding)) &&
+    recommend >= minRecommend &&
+    recommend <= maxReccomend
+  );
+}
 
-  function handleFilterInput() {
-    const filteredResults = userResponses.filter(responseFilter);
-    responses.innerHTML = filteredResults.map (renderUserResponse).join("");
-  }
-
-  searchInput.addEventListener('input', handleFilterInput);
+function handleFilterInput() {
+  const filteredResults = responses.filter(responseFilter);
+  userResponsesSection.innerHTML = filteredResults
+    .map(renderUserResponse)
+    .join('');
+}
 codingSelect.addEventListener('input', handleFilterInput);
+searchInput.addEventListener('input', handleFilterInput);
 minInput.addEventListener('input', handleFilterInput);
 maxInput.addEventListener('input', handleFilterInput);
